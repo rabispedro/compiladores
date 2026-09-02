@@ -1,4 +1,4 @@
-package lexico;
+package ppm.lexico;
 
 public enum ClasseTokenPPM {
     NumeroInteiro,

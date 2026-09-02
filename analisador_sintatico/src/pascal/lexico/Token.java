@@ -1,10 +1,9 @@
-package lexico;
+package pascal.lexico;
 
 public class Token {
-    
     private int linha;
     private int coluna;
-    private ClasseTokenOBJ classe;
+    private ClasseToken classe;
     private ValorToken valor;
 
     public Token(int linha, int coluna) {
@@ -28,11 +27,11 @@ public class Token {
         this.coluna = coluna;
     }
 
-    public ClasseTokenOBJ getClasse() {
+    public ClasseToken getClasse() {
         return classe;
     }
 
-    public void setClasse(ClasseTokenOBJ classe) {
+    public void setClasse(ClasseToken classe) {
         this.classe = classe;
     }
 
@@ -46,7 +45,7 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token [" + linha + ", " + coluna + ", classe=" + classe + ((valor != null) ? ", valor=" + valor : "") + "]";
+        return "Token [" + linha + ", " + coluna + ", classe=" + classe + ((valor != null) ? ", valor=" + valor : "")
+                + "]";
     }
-
 }

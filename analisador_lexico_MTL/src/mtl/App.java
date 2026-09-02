@@ -1,10 +1,12 @@
-import lexico.ClasseTokenMTL;
-import lexico.LexicoMTL;
-import lexico.Token;
+package mtl;
+
+import mtl.lexico.ClasseTokenMTL;
+import mtl.lexico.LexicoMTL;
+import mtl.lexico.Token;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        LexicoMTL l = new LexicoMTL("cube.mtl");
+    public static void main(String[] args) {
+        LexicoMTL l = new LexicoMTL("analisador_lexico_MTL/cube.mtl");
         Token t;
 
         // int cont = 0;
@@ -14,6 +16,5 @@ public class App {
             // cont++;
             // if (cont == 10) break;
         } while (t.getClasse() != ClasseTokenMTL.EOF);
-
     }
 }

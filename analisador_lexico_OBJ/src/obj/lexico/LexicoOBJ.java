@@ -1,4 +1,4 @@
-package lexico;
+package obj.lexico;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -46,14 +46,6 @@ public class LexicoOBJ {
                     }
 
                     switch (lexema.toString()) {
-                        case "mtllib" -> token.setClasse(ClasseTokenOBJ.KW_MTLLIB);
-                        case "usemtl" -> token.setClasse(ClasseTokenOBJ.KW_USEMTL);
-                        case "v" -> token.setClasse(ClasseTokenOBJ.KW_V);
-                        case "vt" -> token.setClasse(ClasseTokenOBJ.KW_VT);
-                        case "f" -> token.setClasse(ClasseTokenOBJ.KW_F);
-                        case "g" -> token.setClasse(ClasseTokenOBJ.KW_G);
-                        case "o" -> token.setClasse(ClasseTokenOBJ.KW_O);
-                        case "vn" -> token.setClasse(ClasseTokenOBJ.KW_VN);
                         default -> {
                             token.setClasse(ClasseTokenOBJ.IDENTIFICADOR);
                             // System.err.println("Erro Lexico. Caractere Invalido.");

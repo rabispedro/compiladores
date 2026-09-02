@@ -1,6 +1,7 @@
-package lexico;
+package mtl.lexico;
 
 public class ValorToken {
+
     private String texto;
     private Number numero;
 

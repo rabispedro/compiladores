@@ -1,10 +1,9 @@
-package lexico;
+package pascal.lexico;
 
 public class ValorToken {
-
     private String texto;
     private Number numero;
-    
+
     public ValorToken(String texto) {
         this.texto = texto;
     }
@@ -31,8 +30,7 @@ public class ValorToken {
 
     @Override
     public String toString() {
-        return ((texto != null) ? "texto=" + texto : "") + 
-               ((numero != null) ? "numero=" + numero : "");
+        return ((texto != null) ? "texto=" + texto : "") +
+                ((numero != null) ? "numero=" + numero : "");
     }
-
 }

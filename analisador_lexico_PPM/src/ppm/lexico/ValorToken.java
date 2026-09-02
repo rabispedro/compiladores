@@ -1,15 +1,14 @@
-package lexico;
+package ppm.lexico;
 
 public class ValorToken {
-
     private String texto;
-    private Number numero;
-    
+    private Integer numero;
+
     public ValorToken(String texto) {
         this.texto = texto;
     }
 
-    public ValorToken(Number numero) {
+    public ValorToken(Integer numero) {
         this.numero = numero;
     }
 
@@ -21,18 +20,17 @@ public class ValorToken {
         this.texto = texto;
     }
 
-    public Number getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(Number numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
     @Override
     public String toString() {
-        return ((texto != null) ? "texto=" + texto : "") + 
-               ((numero != null) ? "numero=" + numero : "");
+        return ((texto != null) ? "texto=" + texto : "") +
+                ((numero != null) ? "numero=" + numero : "");
     }
-
 }

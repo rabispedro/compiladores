@@ -1,10 +1,9 @@
-package lexico;
+package ppm.lexico;
 
 public class Token {
-    
     private int linha;
     private int coluna;
-    private ClasseTokenMTL classe;
+    private ClasseTokenPPM classe;
     private ValorToken valor;
 
     public Token(int linha, int coluna) {
@@ -28,11 +27,11 @@ public class Token {
         this.coluna = coluna;
     }
 
-    public ClasseTokenMTL getClasse() {
+    public ClasseTokenPPM getClasse() {
         return classe;
     }
 
-    public void setClasse(ClasseTokenMTL classe) {
+    public void setClasse(ClasseTokenPPM classe) {
         this.classe = classe;
     }
 
@@ -46,7 +45,8 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token [" + linha + ", " + coluna + ", classe=" + classe + ((valor != null) ? ", valor=" + valor : "") + "]";
+        return "Token [" + linha + ", " + coluna + ", classe=" + classe + ((valor != null) ? ", valor=" + valor : "")
+                + "]";
     }
 
 }

@@ -1,4 +1,4 @@
-package lexico;
+package pascal.lexico;
 
 public enum ClasseToken {
     IDENTIFICADOR,

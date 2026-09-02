@@ -1,4 +1,4 @@
-package lexico;
+package pascal.lexico;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Lexico {
-
     private String nomeArquivo;
     private BufferedReader br;
     private char caractere;

@@ -1,8 +1,8 @@
-package sintatico;
+package pascal.sintatico;
 
-import lexico.ClasseToken;
-import lexico.Lexico;
-import lexico.Token;
+import pascal.lexico.ClasseToken;
+import pascal.lexico.Lexico;
+import pascal.lexico.Token;
 
 public class Sintatico {
 	private final Lexico lexico;
@@ -81,7 +81,58 @@ public class Sintatico {
 		}
 	}
 
+	// <rotina> ::= <procedimento> | <funcao> | ε
 	private void rotina() {
+		if (isPalavraReservada("procedimento")) {
+			procedimento();
+		} else if (isPalavraReservada("funcao")) {
+			funcao();
+		}
+	}
+
+	// <procedimento> ::= procedure id {A04} <parametros> {A48} ; <corpo> {A56} ;
+	// <rotina>
+	private void procedimento() {
+		if (isPalavraReservada("procedure")) {
+			token = lexico.getNextToken();
+
+			if (isPalavraReservada("id")) {
+				// A{04}
+
+				parametros();
+
+				// A{48}
+
+				token = lexico.getNextToken();
+				if (token.getClasse() == ClasseToken.PONTO_VIRGULA) {
+					corpo();
+
+					// A{56}
+
+					token = lexico.getNextToken();
+
+					if (token.getClasse() == ClasseToken.PONTO_VIRGULA) {
+						rotina();
+					} else {
+						erroSintatico("Faltou o ponto e virgula (;)");
+					}
+				} else {
+					erroSintatico("Faltou o ponto e virgula (;)");
+				}
+			} else {
+				erroSintatico("Faltou o 'IDENTIFICADOR'");
+			}
+		} else {
+			erroSintatico("Faltou a palavra 'PROCEDURE'");
+		}
+	}
+
+	private void parametros() {
+	}
+
+	// <funcao> ::= function id {A05} <parametros> {A48} : <tipo_funcao> {A47} ;
+	// <corpo> {A56}
+	private void funcao() {
 	}
 
 	private void sentencas() {
@@ -106,9 +157,9 @@ public class Sintatico {
 
 	// <variaveis> ::= id {A03} <mais_var>
 	private void variaveis() {
-		// if (isPalavraReservada())
 		if (token.getClasse() == ClasseToken.IDENTIFICADOR) {
 			token = lexico.getNextToken();
+
 			// A{03}
 
 			mais_var();
@@ -148,6 +199,14 @@ public class Sintatico {
 			mais_dc();
 		}
 	}
+
+	// ; <rotina>
+	// <parametros> ::= ( <lista_parametros> ) | ε
+	// <lista_parametros> ::= <lista_id> : <tipo_var> {A06} <cont_lista_par>
+	// <cont_lista_par> ::= ; <lista_parametros> | ε
+	// <lista_id> ::= id {A07} <cont_lista_id>
+	// <cont_lista_id> ::= , <lista_id> | ε
+	// <tipo_funcao> ::= integer
 
 	private void erroSintatico(String mensagem) {
 		System.err.println("Linha: " + token.getLinha() + ", Coluna: " + token.getColuna() + " ['"

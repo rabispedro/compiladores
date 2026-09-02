@@ -1,10 +1,9 @@
-package lexico;
+package obj.lexico;
 
 public class Token {
-
     private int linha;
     private int coluna;
-    private ClasseToken classe;
+    private ClasseTokenOBJ classe;
     private ValorToken valor;
 
     public Token(int linha, int coluna) {
@@ -28,11 +27,11 @@ public class Token {
         this.coluna = coluna;
     }
 
-    public ClasseToken getClasse() {
+    public ClasseTokenOBJ getClasse() {
         return classe;
     }
 
-    public void setClasse(ClasseToken classe) {
+    public void setClasse(ClasseTokenOBJ classe) {
         this.classe = classe;
     }
 
@@ -46,8 +45,7 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token [" + linha + ", " + coluna + ", classe=" + classe + ((valor != null) ? ", valor=" + valor : "")
-                + "]";
+        return "Token [" + linha + ", " + coluna + ", classe=" + classe + ((valor != null) ? ", valor=" + valor : "") + "]";
     }
 
 }

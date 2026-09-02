@@ -1,4 +1,4 @@
-package lexico;
+package obj.lexico;
 
 public enum ClasseTokenOBJ {
     KW_MTLLIB,

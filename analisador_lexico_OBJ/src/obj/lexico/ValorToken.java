@@ -1,15 +1,14 @@
-package lexico;
+package obj.lexico;
 
 public class ValorToken {
-
     private String texto;
-    private Integer numero;
-    
+    private Number numero;
+
     public ValorToken(String texto) {
         this.texto = texto;
     }
 
-    public ValorToken(Integer numero) {
+    public ValorToken(Number numero) {
         this.numero = numero;
     }
 
@@ -21,18 +20,18 @@ public class ValorToken {
         this.texto = texto;
     }
 
-    public Integer getNumero() {
+    public Number getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(Number numero) {
         this.numero = numero;
     }
 
     @Override
     public String toString() {
-        return ((texto != null) ? "texto=" + texto : "") + 
-               ((numero != null) ? "numero=" + numero : "");
+        return ((texto != null) ? "texto=" + texto : "") +
+                ((numero != null) ? "numero=" + numero : "");
     }
 
 }

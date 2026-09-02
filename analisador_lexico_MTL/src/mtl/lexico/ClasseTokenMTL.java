@@ -1,4 +1,4 @@
-package lexico;
+package mtl.lexico;
 
 public enum ClasseTokenMTL {
     KW_NEWMTL,
