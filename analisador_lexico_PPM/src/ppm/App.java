@@ -14,7 +14,7 @@ public class App {
             t = l.getNextToken();
             System.out.println(t);
             cont++;
-            if (cont == 10)
+            if (cont == 15)
                 break;
         } while (t.getClasse() != ClasseTokenPPM.EOF);
 

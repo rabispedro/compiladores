@@ -7,15 +7,15 @@ import pascal.sintatico.Sintatico;
 
 public class App {
     public static void main(String[] args) {
-        Lexico l = new Lexico("analisador_sintatico/teste.pas");
-        Token t;
+        // Lexico l = new Lexico("analisador_sintatico/fibonacci.pas");
+        // Token t;
 
-        do {
-            t = l.getNextToken();
-            System.out.println(t);
-        } while (t.getClasse() != ClasseToken.EOF);
+        // do {
+        //     t = l.getNextToken();
+        //     System.out.println(t);
+        // } while (t.getClasse() != ClasseToken.EOF);
 
-        l = new Lexico("analisador_sintatico/teste.pas");
+        Lexico l = new Lexico("analisador_sintatico/fibonacci.pas");
 
         Sintatico s = new Sintatico(l);
         s.analisar();

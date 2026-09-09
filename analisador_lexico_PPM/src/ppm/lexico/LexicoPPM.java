@@ -66,7 +66,7 @@ public class LexicoPPM {
                 } else if (caractere == ' ' || caractere == '\t') {
                     caractere = (char) br.read();
                     coluna++;
-                } else if (caractere == '\n') {
+                } else if (caractere == '\n' || caractere == '\r') {
                     linha++;
                     coluna = 1;
                     caractere = (char) br.read();
@@ -77,7 +77,7 @@ public class LexicoPPM {
                         caractere = (char) br.read();
                         coluna++;
                     }
-                    if (caractere == '\n') {
+                    if (caractere == '\n' || caractere == '\r') {
                         linha++;
                         coluna = 1;
                         caractere = (char) br.read();

@@ -67,7 +67,7 @@ public class Lexico {
                 } else if (caractere == ' ' || caractere == '\t') {
                     caractere = (char) br.read();
                     coluna++;
-                } else if (caractere == '\n') {
+                } else if (caractere == '\n' || caractere == '\r') {
                     linha++;
                     coluna = 1;
                     caractere = (char) br.read();
@@ -96,7 +96,7 @@ public class Lexico {
                             caractere = (char) br.read();
                             coluna++;
                         }
-                        if (caractere == '\n') {
+                        if (caractere == '\n' || caractere == '\r') {
                             linha++;
                             coluna = 1;
                             caractere = (char) br.read();
@@ -180,7 +180,7 @@ public class Lexico {
                     while (caractere != '}') {
                         caractere = (char) br.read();
                         coluna++;
-                        if (caractere == '\n') {
+                        if (caractere == '\n' || caractere == '\r') {
                             linha++;
                             coluna = 1;
                             caractere = (char) br.read();
@@ -196,7 +196,7 @@ public class Lexico {
                     caractere = (char) br.read();
                     coluna++;
                     while (caractere != '\'') {
-                        if (caractere == '\n') {
+                        if (caractere == '\n' || caractere == '\r') {
                             System.err.println("Erro Lexico. " + linha + ", " + coluna
                                     + " Strings devem terminar na mesma linha.");
                             System.exit(1);
