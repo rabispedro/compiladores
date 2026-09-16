@@ -15,7 +15,6 @@ public class Sintatico {
 	public void analisar() {
 		token = lexico.getNextToken();
 		programa();
-
 	}
 
 	// <programa> ::= program id {A01} ; <corpo> . {A45}

@@ -14,6 +14,11 @@ public class Sintatico {
 		this.lexico = lexico;
 	}
 
+	public void analisar() {
+		token = lexico.getNextToken();
+		arquivo_obj();
+	}
+
 	// <arquivo_obj>::= <linhas_obj> EOF
 	private void arquivo_obj() {
 		linhas_obj();

@@ -7,5 +7,7 @@ public class App {
     public static void main(String[] args) {
         LexicoPPM l = new LexicoPPM("analisador_lexico_PPM/java-logo.ppm");
         Sintatico s = new Sintatico(l);
+        s.analisar();
+        System.out.println("Arquivo analisado com sucesso!");
     }
 }

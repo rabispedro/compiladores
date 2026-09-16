@@ -12,6 +12,11 @@ public class Sintatico {
 		this.lexico = lexico;
 	}
 
+	public void analisar() {
+		token = lexico.getNextToken();
+		imagem_ppm();
+	}
+
 	// <imagem_ppm>::= <cabecalho> <lista_pixels> EOF
 	private void imagem_ppm() {
 		cabecalho();
