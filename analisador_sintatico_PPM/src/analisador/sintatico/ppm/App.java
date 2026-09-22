@@ -5,8 +5,9 @@ import analisador.sintatico.ppm.sintatico.Sintatico;
 
 public class App {
     public static void main(String[] args) {
-        LexicoPPM l = new LexicoPPM("analisador_lexico_PPM/java-logo.ppm");
-        Sintatico s = new Sintatico(l);
+        var l = new LexicoPPM("analisador_sintatico_PPM/java-logo.ppm");
+
+        var s = new Sintatico(l);
         s.analisar();
         System.out.println("Arquivo analisado com sucesso!");
     }

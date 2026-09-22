@@ -52,7 +52,7 @@ public class LexicoPPM {
                         System.err.println("Erro Lexico. Caractere Invalido.");
                         System.exit(1);
                     }
-                    token.setValor(new ValorToken(lexema.toString()));
+                    token.setValor(new ValorToken(lexema.toString().toLowerCase()));
                     return token;
                 } else if (Character.isDigit(caractere)) {
                     while (Character.isDigit(caractere)) {
@@ -93,10 +93,9 @@ public class LexicoPPM {
             }
             token = new Token(linha, coluna);
             token.setClasse(ClasseTokenPPM.EOF);
-            return token;
-        } catch (
 
-        IOException e) {
+            return token;
+        } catch (IOException e) {
             System.err.println("Não foi possível ler do arquivo: " + nomeArquivo);
         }
         return null;

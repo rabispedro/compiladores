@@ -34,7 +34,7 @@ public class Sintatico {
 	private void materiais() {
 		if (token.getValor() != null) {
 			material();
-	
+
 			materiais();
 		}
 	}
@@ -60,7 +60,7 @@ public class Sintatico {
 	private void propriedades() {
 		if (token.getValor() != null) {
 			propriedade();
-	
+
 			propriedades();
 		}
 	}
@@ -208,6 +208,7 @@ public class Sintatico {
 	private void erroSintatico(String mensagem) {
 		System.err.println("Linha: " + token.getLinha() + ", Coluna: " + token.getColuna() + " ['"
 				+ token.getValor().getTexto() + "']. Erro Sintático: " + mensagem);
+		System.exit(2);
 	}
 
 	private boolean isPalavraReservada(final String palavra) {

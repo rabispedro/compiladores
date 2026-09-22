@@ -267,6 +267,7 @@ public class Sintatico {
 	private void erroSintatico(String mensagem) {
 		System.err.println("Linha: " + token.getLinha() + ", Coluna: " + token.getColuna() + " ['"
 				+ token.getValor().getTexto() + "']. Erro Sintático: " + mensagem);
+		System.exit(2);
 	}
 
 	private boolean isPalavraReservada(final String palavra) {
