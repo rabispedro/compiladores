@@ -303,6 +303,8 @@ public class Sintatico {
 	// string {A59} <mais_exp_write> |
 	// intnum {A43} <mais_exp_write>
 	private void exp_write() {
+		System.out.println("Token exp_write: " + token.getValor());
+
 		if (token.getClasse() == ClasseToken.IDENTIFICADOR) {
 			token = lexico.getNextToken();
 

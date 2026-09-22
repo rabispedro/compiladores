@@ -217,7 +217,7 @@ public class Lexico {
                     token.setValor(new ValorToken(lexema.toString()));
                     return token;
                 } else {
-                    System.err.println("Erro Lexico. Caractere Invalido.");
+                    System.err.println("Erro Lexico. Caractere '" + caractere +"' Invalido.");
                     System.exit(1);
                 }
             }
