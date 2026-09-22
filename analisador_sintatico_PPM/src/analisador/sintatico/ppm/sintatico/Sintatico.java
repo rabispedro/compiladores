@@ -77,10 +77,8 @@ public class Sintatico {
 		if (token.getValor() != null) {
 			// Call Stack não pode ser maior que BATCH_SIZE
 			if (isDispatching) {
-				calls--;
-
-				if (calls == 0)
-					isDispatching = false;
+				calls = 0;
+				isDispatching = false;
 			} else {
 				calls++;
 
