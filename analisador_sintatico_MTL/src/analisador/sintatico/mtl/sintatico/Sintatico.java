@@ -32,14 +32,16 @@ public class Sintatico {
 
 	// <materiais>::= <material> <materiais> | ε
 	private void materiais() {
-		material();
-
-		materiais();
+		if (token.getValor() != null) {
+			material();
+	
+			materiais();
+		}
 	}
 
 	// <material>::= KW_NEWMTL IDENTIFICADOR <propriedades>
 	private void material() {
-		if (isPalavraReservada("KW_NEWMTL")) {
+		if (isPalavraReservada("KW_NEWMTL") || isPalavraReservada("NEWMTL")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.IDENTIFICADOR) {
@@ -50,36 +52,36 @@ public class Sintatico {
 				erroSintatico("Faltou 'IDENTIFICADOR'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_NEWMTL'");
+			erroSintatico("Faltou palavra reservada 'NEWMTL'");
 		}
 	}
 
 	// <propriedades>::= <propriedade> <propriedades> | ε
 	private void propriedades() {
-		propriedade();
-
-		propriedades();
+		if (token.getValor() != null) {
+			propriedade();
+	
+			propriedades();
+		}
 	}
 
 	// <propriedade>::= <cor_amb> | <cor_difusa> | <cor_spec> | <exp_spec> |
 	// <mod_ilum> | <mapa_textura>
 	private void propriedade() {
-		switch (token.getValor().getTexto()) {
-			case "cor_amb" -> cor_amb();
-			case "cor_difusa" -> cor_difusa();
-			case "cor_spec" -> cor_spec();
-			case "exp_spec" -> exp_spec();
-			case "mod_ilum" -> mod_ilum();
-			case "mapa_textura" -> mapa_textura();
+		switch (token.getValor().getTexto().toLowerCase()) {
+			case "ka" -> cor_amb();
+			case "kd" -> cor_difusa();
+			case "ks" -> cor_spec();
+			case "ns" -> exp_spec();
+			case "illum" -> mod_ilum();
+			case "map_kd" -> mapa_textura();
 			default -> erroSintatico("Token de propriedade inválido");
 		}
 	}
 
 	// <cor_amb>::= KW_KA FLOAT FLOAT FLOAT
 	private void cor_amb() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_KA")) {
+		if (isPalavraReservada("KA")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.FLOAT) {
@@ -100,15 +102,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_KA'");
+			erroSintatico("Faltou palavra reservada 'KA'");
 		}
 	}
 
 	// <cor_difusa>::= KW_KD FLOAT FLOAT FLOAT
 	private void cor_difusa() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_KD")) {
+		if (isPalavraReservada("KD")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.FLOAT) {
@@ -129,15 +129,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_KD'");
+			erroSintatico("Faltou palavra reservada 'KD'");
 		}
 	}
 
 	// <cor_spec>::= KW_KS FLOAT FLOAT FLOAT
 	private void cor_spec() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_KS")) {
+		if (isPalavraReservada("KS")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.FLOAT) {
@@ -158,15 +156,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_KS'");
+			erroSintatico("Faltou palavra reservada 'KS'");
 		}
 	}
 
 	// <exp_spec>::= KW_NS FLOAT
 	private void exp_spec() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_NS")) {
+		if (isPalavraReservada("NS")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.FLOAT) {
@@ -175,15 +171,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_NS'");
+			erroSintatico("Faltou palavra reservada 'NS'");
 		}
 	}
 
 	// <mod_ilum>::= KW_ILLUM INTEIRO
 	private void mod_ilum() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_ILLUM")) {
+		if (isPalavraReservada("ILLUM")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.INTEIRO) {
@@ -192,15 +186,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'INTEIRO'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_ILLUM'");
+			erroSintatico("Faltou palavra reservada 'ILLUM'");
 		}
 	}
 
 	// <mapa_textura>::= KW_MAP_KD IDENTIFICADOR
 	private void mapa_textura() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_MAP_KD")) {
+		if (isPalavraReservada("MAP_KD")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenMTL.IDENTIFICADOR) {
@@ -209,7 +201,7 @@ public class Sintatico {
 				erroSintatico("Faltou 'IDENTIFICADOR'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_MAP_KD'");
+			erroSintatico("Faltou palavra reservada 'MAP_KD'");
 		}
 	}
 
