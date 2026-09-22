@@ -32,9 +32,11 @@ public class Sintatico {
 
 	// <linhas_obj>::= <comando> <linhas_obj> | ε
 	private void linhas_obj() {
-		comando();
+		if (token.getValor() != null) {
+			comando();
 
-		linhas_obj();
+			linhas_obj();
+		}
 	}
 
 	// <comando>::= <importa_mtl>
@@ -46,24 +48,22 @@ public class Sintatico {
 	// | <def_normal>
 	// | <def_face>
 	private void comando() {
-		switch (token.getValor().getTexto()) {
-			case "importa_mtl" -> importa_mtl();
-			case "usa_mtl" -> usa_mtl();
-			case "def_objeto" -> def_objeto();
-			case "def_grupo" -> def_grupo();
-			case "def_vertice" -> def_vertice();
-			case "def_uv" -> def_uv();
-			case "def_normal" -> def_normal();
-			case "def_face" -> def_face();
+		switch (token.getValor().getTexto().toLowerCase()) {
+			case "mtllib" -> importa_mtl();
+			case "usemtl" -> usa_mtl();
+			case "o" -> def_objeto();
+			case "g" -> def_grupo();
+			case "v" -> def_vertice();
+			case "vt" -> def_uv();
+			case "vn" -> def_normal();
+			case "f" -> def_face();
 			default -> erroSintatico("Faltou palavra de 'COMANDO'");
 		}
 	}
 
 	// <importa_mtl> ::= KW_MTLLIB IDENTIFICADOR
 	private void importa_mtl() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_MTLLIB")) {
+		if (isPalavraReservada("MTLLIB")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenOBJ.IDENTIFICADOR) {
@@ -72,15 +72,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'IDENTIFICADOR'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_MTLLIB'");
+			erroSintatico("Faltou palavra reservada 'MTLLIB'");
 		}
 	}
 
 	// <usa_mtl> ::= KW_USEMTL IDENTIFICADOR
 	private void usa_mtl() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_USEMTL")) {
+		if (isPalavraReservada("USEMTL")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenOBJ.IDENTIFICADOR) {
@@ -89,15 +87,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'IDENTIFICADOR'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_USEMTL'");
+			erroSintatico("Faltou palavra reservada 'USEMTL'");
 		}
 	}
 
 	// <def_objeto> ::= KW_O IDENTIFICADOR
 	private void def_objeto() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_O")) {
+		if (isPalavraReservada("O")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenOBJ.IDENTIFICADOR) {
@@ -106,15 +102,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'IDENTIFICADOR'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_O'");
+			erroSintatico("Faltou palavra reservada 'O'");
 		}
 	}
 
 	// <def_grupo> ::= KW_G IDENTIFICADOR
 	private void def_grupo() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_G")) {
+		if (isPalavraReservada("G")) {
 			token = lexico.getNextToken();
 
 			if (token.getClasse() == ClasseTokenOBJ.IDENTIFICADOR) {
@@ -123,24 +117,22 @@ public class Sintatico {
 				erroSintatico("Faltou 'IDENTIFICADOR'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_G'");
+			erroSintatico("Faltou palavra reservada 'G'");
 		}
 	}
 
 	// <def_vertice> ::= KW_V FLOAT FLOAT FLOAT
 	private void def_vertice() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_V")) {
+		if (isPalavraReservada("V")) {
 			token = lexico.getNextToken();
 
-			if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+			if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 				token = lexico.getNextToken();
 
-				if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+				if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 					token = lexico.getNextToken();
 
-					if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+					if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 						token = lexico.getNextToken();
 					} else {
 						erroSintatico("Faltou 'FLOAT'");
@@ -152,21 +144,19 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_V'");
+			erroSintatico("Faltou palavra reservada 'V'");
 		}
 	}
 
 	// <def_uv> ::= KW_VT FLOAT FLOAT
 	private void def_uv() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_VT")) {
+		if (isPalavraReservada("VT")) {
 			token = lexico.getNextToken();
 
-			if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+			if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 				token = lexico.getNextToken();
 
-				if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+				if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 					token = lexico.getNextToken();
 				} else {
 					erroSintatico("Faltou 'FLOAT'");
@@ -175,25 +165,23 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_VT'");
+			erroSintatico("Faltou palavra reservada 'VT'");
 		}
 
 	}
 
 	// <def_normal> ::= KW_VN FLOAT FLOAT FLOAT
 	private void def_normal() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_VN")) {
+		if (isPalavraReservada("VN")) {
 			token = lexico.getNextToken();
 
-			if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+			if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 				token = lexico.getNextToken();
 
-				if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+				if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 					token = lexico.getNextToken();
 
-					if (token.getClasse() == ClasseTokenOBJ.FLOAT) {
+					if (token.getClasse() == ClasseTokenOBJ.FLOAT || token.getClasse() == ClasseTokenOBJ.INTEIRO) {
 						token = lexico.getNextToken();
 					} else {
 						erroSintatico("Faltou 'FLOAT'");
@@ -205,15 +193,13 @@ public class Sintatico {
 				erroSintatico("Faltou 'FLOAT'");
 			}
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_VN'");
+			erroSintatico("Faltou palavra reservada 'VN'");
 		}
 	}
 
 	// <def_face> ::= KW_F <conjunto> <conjunto> <conjunto>
 	private void def_face() {
-		token = lexico.getNextToken();
-
-		if (isPalavraReservada("KW_F")) {
+		if (isPalavraReservada("F")) {
 			token = lexico.getNextToken();
 
 			conjunto();
@@ -222,7 +208,7 @@ public class Sintatico {
 
 			conjunto();
 		} else {
-			erroSintatico("Faltou palavra reservada 'KW_F'");
+			erroSintatico("Faltou palavra reservada 'F'");
 		}
 	}
 

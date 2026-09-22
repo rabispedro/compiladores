@@ -45,12 +45,26 @@ public class LexicoOBJ {
                         coluna++;
                     }
 
-                    switch (lexema.toString()) {
-                        default -> {
-                            token.setClasse(ClasseTokenOBJ.IDENTIFICADOR);
-                            // System.err.println("Erro Lexico. Caractere Invalido.");
-                            // System.exit(1);
-                        }
+                    if (lexema.toString().toLowerCase().contains("mtllib")) {
+                        token.setClasse(ClasseTokenOBJ.KW_MTLLIB);
+                    } else if (lexema.toString().toLowerCase().contains("usemtl")) {
+                        token.setClasse(ClasseTokenOBJ.KW_USEMTL);
+                    } else if (lexema.toString().toLowerCase().contains("f")) {
+                        token.setClasse(ClasseTokenOBJ.KW_F);
+                    } else if (lexema.toString().toLowerCase().contains("o")) {
+                        token.setClasse(ClasseTokenOBJ.KW_O);
+                    } else if (lexema.toString().toLowerCase().contains("g")) {
+                        token.setClasse(ClasseTokenOBJ.KW_G);
+                    } else if (lexema.toString().toLowerCase().contains("vn")) {
+                        token.setClasse(ClasseTokenOBJ.KW_VN);
+                    } else if (lexema.toString().toLowerCase().contains("vt")) {
+                        token.setClasse(ClasseTokenOBJ.KW_VT);
+                    } else if (lexema.toString().toLowerCase().contains("v")) {
+                        token.setClasse(ClasseTokenOBJ.KW_V);
+                    } else {
+                        token.setClasse(ClasseTokenOBJ.IDENTIFICADOR);
+                        // System.err.println("Erro Lexico. Caractere '" + lexema.toString() + "' Invalido.");
+                        // System.exit(1);
                     }
 
                     token.setValor(new ValorToken(lexema.toString()));
@@ -90,6 +104,7 @@ public class LexicoOBJ {
                 } else if (caractere == '/') {
                     caractere = (char) br.read();
                     coluna++;
+                    token.setValor(new ValorToken("/"));
                     token.setClasse(ClasseTokenOBJ.BARRA);
                     return token;
                 } else if (caractere == ' ' || caractere == '\t') {
